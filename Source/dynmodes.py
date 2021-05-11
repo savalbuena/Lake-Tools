@@ -84,6 +84,8 @@ def dynmodes(*args):
         Nsq = args[0]
         p = args[1]
         nmodes = args[2]
+        z = np.zeros(len(p))
+
 
     rho0 = 1028
     if len(Nsq) != len(p):
@@ -93,18 +95,22 @@ def dynmodes(*args):
 
     if p[0] > 0:
         # Add surface pressure with top Nsq value
-        z[0] = 0
+        z = np.zeros(len(Nsq)+1)
         z[1:n+1] = -p[0:n]
+        N2 = np.zeros(len(Nsq)+1)
         N2[0] = Nsq[0]
-        N2[1:n+1] = Nsq[1:n]
+        N2[1:n+1] = Nsq[0:n]
+        nz = n + 1
+        print(1)
     else:
         z = -p
         N2 = Nsq
         nz = n
+        print(2)
     # Calculte depths and spacing
-    dz = np.zeros(n-1)
+    dz = np.zeros(nz-1)
     dz[:] = np.nan
-    zm = np.zeros(n-1)
+    zm = np.zeros(nz-1)
     zm[:] = np.nan
     dz[0:nz-1] = z[0:nz-1] - z[1:nz]
     # midpoint depth
@@ -155,5 +161,3 @@ def dynmodes(*args):
          pmodes[nz-1,i] = pr[nz-2]
 
     return wmodes, pmodes, ce
-
-[wmodes, pmodes, ce] = dynmodes()
