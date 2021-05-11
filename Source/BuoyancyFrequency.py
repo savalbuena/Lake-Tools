@@ -23,6 +23,11 @@
 #
 # 	plot(b.f, attr(b.f, 'depths'), type='b',
 # 		ylab='Depth', xlab='Buoyancy Frequency', ylim=c(max(depths), min(depths)))
+#----Author: Jordan S Read 2011 ----
+# Editied by:
+# 1/30/2010 - Luke Winslow <lawinslow@gmail.com>
+# Adapted for python and edited by:
+# 05-11-2021 - Sergio A Valbuena <savalbuena@ucdavis.edu>
 
 import sys
 import os
