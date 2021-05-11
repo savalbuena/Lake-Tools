@@ -101,12 +101,10 @@ def dynmodes(*args):
         N2[0] = Nsq[0]
         N2[1:n+1] = Nsq[0:n]
         nz = n + 1
-        print(1)
     else:
         z = -p
         N2 = Nsq
         nz = n
-        print(2)
     # Calculte depths and spacing
     dz = np.zeros(nz-1)
     dz[:] = np.nan
