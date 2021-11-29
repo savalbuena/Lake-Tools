@@ -60,7 +60,7 @@
 #  developed by John Klinck. July, 1999
 #  send comments and corrections to klinck@ccpo.odu.edu
 
-
+# There are still differences in the wmodes results
 import sys
 import os
 import numpy as np

@@ -1,4 +1,4 @@
-# WDENSITY Density of water with supplied Temp and Salinity
+# WaterDensity.py Density of water with supplied Temp and Salinity
 # rho = wdensity(Temperature, Salinity) is the density of water with the
 # given temperature and salinity
 # T is in °C
@@ -20,7 +20,6 @@
 import sys
 import os
 import numpy as np
-import matplotlib.pyplot as plt
 
 def wdensity(*args):
     MM = False
