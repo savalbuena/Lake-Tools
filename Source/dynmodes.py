@@ -90,6 +90,7 @@ def dynmodes(*args):
     rho0 = 1028
     if len(Nsq) != len(p):
         print('Error, the vectors Nsq and p do not have the same length')
+        exit()
     else:
         n = len(Nsq)
 
