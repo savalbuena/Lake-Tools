@@ -12,25 +12,24 @@
 # Author:
 # 05-11-2021 - Sergio A Valbuena <savalbuena@ucdavis.edu>
 
-import sys
-import os
 import numpy as np
-import matplotlib.pyplot as plt
-from WaterDensity import *
 
 # Declaration of mathematical constants
 g = 9.806           #[m/s2] Gravitational accelaration
 
-def BuoyancyFrequency(rho,z):
+def N2(rho,z):
     numdepths = len(z)
-    N2 = np.zeros(numdepths-1)
     N2z = np.zeros(numdepths -1)
-    N2[:] = np.nan
     N2z[:] = np.nan
 
-    # Calculate the first derivative
-    for i in range(0,numdepths-1):
-        N2[i] = g/rho[i]*(rho[i+1] - rho[i])/(z[i+1] - z[i])
-        N2z[i] = (z[i+1] + z[i])/2
+    # Calculate the gradient
+    drhodz = np.gradient(rho,z,edge_order=1)
+    # N2
+    N2 = g/rho*drhodz
 
+    # Calculate the new depth array
+    for i in range(0,numdepths-1):
+         N2z[i] = (z[i+1] + z[i])/2
+
+    # return N2, N2z
     return N2, N2z
