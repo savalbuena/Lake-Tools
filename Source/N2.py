@@ -29,4 +29,4 @@ def N2(rho,z,axis):
         drhodz[:,i] = np.gradient(rho[:,i],z[:,i])
     N2 = (g/rho)*(drhodz)
 
-    return N2
+    return N2,drhodz
