@@ -37,10 +37,10 @@ vonK = 0.4; #von Karman k
 
 def uStar(wspd,windHeight,EpiRho):
     # ~ eqn (1) ~
-    if wspd < 5:
-        cd = 0.001
-    else:
-        cd = 0.0015
+    cd = 0.0015*np.ones(len(wspd))
+    idata = wspd < 5
+    cd[idata] = 0.001
+
     # ~ eqn (2) ~
     #If the windspeed is not measured at a height of 10 meters, corrected by
     #(eqn 21) from Amorocho and DeVries, 1980

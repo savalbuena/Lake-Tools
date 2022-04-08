@@ -21,7 +21,7 @@
 # Example 1
 # Temp = np.arange(24,4,-1)
 # Pres = np.arange(0,100,5)
-# rho = wDensity(T=Temp,P=Pres,pressureType='depth',method='UN')
+# rho = wDensity(T=Temp,P=Pres,pressureType='depth')
 # Example 2
 # Temp = np.arange(24,4,-1)
 # rho = wDensity(T=Temp,method='UN')
@@ -29,18 +29,20 @@
 # Temp = np.arange(24,4,-1)
 # Pres = np.arange(0,100,5)
 # Sal = np.arange(0,21,1)
-# rho = wDensity(T=Temp,P=Pres,S=Sal,pessureType='depth',method='UN')
+# rho = wDensity(T=Temp,P=Pres,S=Sal,pessureType='depth')
 # Example 4
 # Temp = np.arange(24,4,-1)
 # Sal = np.arange(0,21,1)
 # rho = wDensity(T=Temp,S=Sal,method='UN')
 
-import sys
-import os
 import numpy as np
 
 def wDensity(**kw):
     keys = list(kw.keys())
+    if not 'method' in keys and not 'S' in keys:
+        kw['method'] = 'MM'
+    elif not 'method' in keys and ('S' in keys or 'P' in keys):
+        kw['method'] = 'UN'
     if 'T'in keys and not 'S' in keys:
         T = kw['T']
         S = 0
