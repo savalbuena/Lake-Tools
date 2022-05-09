@@ -31,7 +31,7 @@ def findMetaBot(drho_dz,thermoD,depths,slope):
 
     #             % if interp can happen
     if i-thermo_index > 0 and drho_dz[thermo_index] > slope:
-        metaBot_depth = np.interp(slope, drho_dz[i:thermo_index+1:-1], sortDepth[i:thermo_index+1:-1])
+        metaBot_depth = np.interp(slope, drho_dz[thermo_index:i+1:1], sortDepth[thermo_index:i+1:1])
 
     if np.isnan(metaBot_depth):
         metaBot_depth = np.max(depths)

@@ -26,8 +26,8 @@ def lakeNumber(bthA,bthD,uSt,St,metaT,metaB,rhoHyp):
         bthA = interp1(bthD,bthA,depT)
         bthD = depT
     else:
-        bthA = bthA.to_numpy()
-        bthD = bthD.to_numpy()
+        bthA = bthA
+        bthD = bthD
 
     Zo = np.min(bthD)
     Io, = np.where(bthD == Zo)[0]

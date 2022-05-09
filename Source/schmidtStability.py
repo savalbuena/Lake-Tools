@@ -44,8 +44,8 @@ def schmidtStability(**kw):
         kw['bthA'] = np.interp(depT,kw['bthD'],kw['bthA'])
         kw['bthD'] = depT
     else:
-        kw['bthA'] = kw['bthA'].to_numpy()
-        kw['bthD'] = kw['bthD'].to_numpy()
+        kw['bthA'] = kw['bthA']
+        kw['bthD'] = kw['bthD']
 
     numD = len(kw['wtr'])
     if np.max(kw['bthD']) > kw['depths'][numD-1]:

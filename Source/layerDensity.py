@@ -44,8 +44,8 @@ def layerDensity(top,bottom,wtr,depths,bthA,bthD,*args):
         bthA = np.interp(depT,bthD,bthA)
         bthD = depT
     else:
-        bthA = bthA.to_numpy()
-        bthD = bthD.to_numpy()
+        bthA = bthA
+        bthD = bthD
     dz = 0.1
     numD = len(wtr)
     if np.max(bthD) > depths[numD-1]:
