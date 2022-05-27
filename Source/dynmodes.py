@@ -1,66 +1,38 @@
-# DYNMODES calculates ocean dynamic vertical modes
-# Usage dynmodes(Nsq, p, nmodes)
-#  taking a column vector of Brunt-Vaisala values (Nsq) at
-#  different pressures (p) and calculating some number of
-#  dynamic modes (nmodes).
-#  Note: The input pressures need not be uniformly spaced,
-#    and the deepest pressure is assumed to be the bottom.
-#
-#  The program is based on the developement in section 6.13
-#  (p. 167ff) of Atmosphere-Ocean Dynamics by Adrian Gill,
-#  Academic Press, 1982.
-#
-#  The variables describing flow in the ocean or atmosphere are separated
-#  into vertical (depending only on height or depth) and horizontal and
-#  time. For example, the vertical velocity (w) is represented as a sum of
-#  different vertical structures as
-#  $$
-#  w = \sum_{n=0}^\infty \hat h_n(z) \hat w_n (x,y,t).
-#  $$
-#
-#  There is a related set of vertical functions ($\hat p_n(z)$) which
-#  represent the vertical structure of horizontal velocity and pressure
-#  anomaly. In the program below, wmodes is a matrix containing the $\hat
-#  h_n(z)$ functions and pmodes are the $\hat p_n(z)$ functions.  wmodes(:,n)
-#  or pmodes(:,n) is the nth vertical structure at the depths (p) provided as
-#  input.
-#
-#  Each set of functions is mutually orthogonal with appropriate weighting.
-#
-#  The governing equation for the vertical structures (6.11.18 in Gill) is
-#  $$
-#    d^2/dz^2 \hat h_n + (N^2(z) /c_e) \hat h_n = 0, n = 1, 2, ... ,
-#  $$
-#  where $N^2(z)$ is the Brunt-Vaiasala freqency squared and $c_e$ is the
-#  eigenvalue, which is the phase speed of the internal gravity wave with the
-#  indicated vertical structure. The boundary conditions are that $\hat h$
-#  vanishes at the surface and bottom (the rigid lid assumption). The
-#  solution for n=0 is a special case described in Gill which is very weakly
-#  affected by the density structure.
-#
-#  The vertical velocity structure (wmodes) is calculated at the depths (p)
-#  for which $N^2$ is provided on input. The differential equation above is
-#  converted to a set of algebraic equations using second order central
-#  finite differences. The linear algebraic equation is
-#  $A * wmodes + \lambda B * wmodes = 0$, where B contains $N^2$ along its
-#  diagonal. The matlab routine eig(A,B) calculate the eigenvalues $\lambda$
-#  which are the reciprocals of the wave speed $c_e$.
-#
-#  USAGE: [wmodes,pmodes,ce]=dynmodes(Nsq,p,nmodes);
-#                               or
-#                            dynmodes;  % to show demo
-#
-#   Inputs:   Nsq = column vector of Brunt-Vaisala buoyancy frequency (s^-2)
-#               p = column vector of pressure (decibars)
-#          nmodes = number of vertical modes to calculate
-#
-#   Outputs:   wmodes = vertical velocity structure
-#              pmodes = horizontal velocity structure
-#                  ce = modal speed (m/s)
-#  developed by John Klinck. July, 1999
-#  send comments and corrections to klinck@ccpo.odu.edu
+# dynmodes.py calculates ocean dynamic vertical modes
 
-# There are still differences in the wmodes results
+# Usage dynmodes(Nsq, p, nmodes)
+# taking a column vector of Brunt-Vaisala values (Nsq) at different pressures (p) and calculating some number of dynamic modes (nmodes).
+# Note: The input pressures need not be uniformly spaced, and the deepest pressure is assumed to be the bottom.
+
+# The program is based on the developement in section 6.13 of Atmosphere-Ocean Dynamics by Adrian Gill, Academic Press, 1982.
+# The variables describing flow in the ocean or atmosphere are separated into vertical (depending only on height or depth), horizontal, and time. For example, the vertical velocity (w) is represented as a sum of different vertical structures as
+
+# $$ w = \sum_{n=0}^\infty \hat h_n(z) \hat w_n (x,y,t). $$
+
+# There is a related set of vertical functions ($\hat p_n(z)$) which represent the vertical structure of horizontal velocity and pressure anomaly. In the program below, wmodes is a matrix containing the $\hat h_n(z)$ functions and pmodes are the $\hat p_n(z)$ functions. wmodes(:,n) or pmodes(:,n) is the nth vertical structure at the depths (p) provided as input.
+
+# Each set of functions is mutually orthogonal with appropriate weighting. The governing equation for the vertical structures (6.11.18 in Gill) is
+#  $$ d^2/dz^2 \hat h_n + (N^2(z) /c_e) \hat h_n = 0, n = 1, 2, ... , $$
+
+# where $N^2(z)$ is the Brunt-Vaiasala freqency squared and $c_e$ is the eigenvalue, which is the phase speed of the internal gravity wave with the indicated vertical structure. The boundary conditions are that $\hat h$ vanishes at the surface and bottom (the rigid lid assumption). The solution for n=0 is a special case described in Gill which is very weakly affected by the density structure.
+
+# The vertical velocity structure (wmodes) is calculated at the depths (p) for which $N^2$ is provided on input. The differential equation above is converted to a set of algebraic equations using second order central finite differences. The linear algebraic equation is $A * wmodes + \lambda B * wmodes = 0$, where B contains $N^2$ along its diagonal. The routine eig(A,B) calculate the eigenvalues $\lambda$ which are the reciprocals of the wave speed $c_e$.
+
+# USAGE: [wmodes,pmodes,ce]=dynmodes(Nsq,p,nmodes);
+
+# Inputs: Nsq = column vector of Brunt-Vaisala buoyancy frequency (s^-2)
+#         p = column vector of pressure (decibars)
+#         nmodes = number of vertical modes to calculate
+
+# Outputs: wmodes = vertical velocity structure
+#          pmodes = horizontal velocity structure
+#          ce = modal speed (m/s)
+
+#  developed by John Klinck. July, 1999
+# Edited by Sergio Valbuena July 2020.
+
+# NOTE: the wmodes result has not been validated yet.
+
 import sys
 import os
 import numpy as np

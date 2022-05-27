@@ -19,14 +19,8 @@ import numpy as np
 g = 9.806           #[m/s2] Gravitational accelaration
 
 def N2(rho,z,axis):
-    # To transform the matrix to make the z values to be in the row position in case the input is column wise
-    if axis == 1:
-        rho = np.transpose(rho)
-        z = np.transpose(z)
 
-    drhodz = np.empty(np.shape(rho))*np.nan
-    for i in range(0,len(rho[0,:])):
-        drhodz[:,i] = np.gradient(rho[:,i],z[:,i])
+    drhodz = np.gradient(rho,z,axis=axis,edge_order=2)
     N2 = (g/rho)*(drhodz)
 
     return N2,drhodz
