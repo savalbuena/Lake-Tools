@@ -27,8 +27,8 @@ def wd_movmean(wd,k,units,nanvar):
     v = np.cos(np.radians(wd))
 
     if nanvar == 'omitnan':
-        mean_u = pd.Series(u).rolling(window=k, min_periods=2).mean().values
-        mean_v = pd.Series(v).rolling(window=k, min_periods=2).mean().values
+        mean_u = pd.Series(u).rolling(window=k, min_periods=1).mean().values
+        mean_v = pd.Series(v).rolling(window=k, min_periods=1).mean().values
     else:
         mean_u = pd.Series(u).rolling(window=k).mean().values
         mean_v = pd.Series(v).rolling(window=k).mean().values
