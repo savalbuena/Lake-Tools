@@ -37,6 +37,7 @@
 
 import numpy as np
 
+
 def wDensity(**kw):
     keys = list(kw.keys())
     if not 'method' in keys and not 'S' in keys:
@@ -52,7 +53,7 @@ def wDensity(**kw):
 
     if kw['method'] == 'MM':
         # <<equation provided by: Martin, J.L., McCutcheon, S.C., 1999. Hydrodynamics and Transport for Water Quality Modeling. Lewis Publications, Boca Raton, FL, 794pp.>>
-        rho = (1000*(1-(T+288.9414)*(T-3.9863)**2/(508929.2*(T+68.12963))))
+        rho = (1000 * (1 - (T + 288.9414) * (T - 3.9863) ** 2 / (508929.2 * (T + 68.12963))))
     elif kw['method'] == 'UN':
         # <<equations provided by: Millero, F.J., Poisson, A., 1981. International one-atmosphere equation of state of seawater. UNESCO Technical Papers in Marine Science. No. 36>>
         #--eqn (1):

@@ -7,11 +7,11 @@
 
 import numpy as np
 
-def findMetaBot(drho_dz,thermoD,depths,slope):
+def findMetaBot(drho_dz, thermoD, depths, slope):
     numDepths = len(depths)
-    metaBot_depth = depths[numDepths-1]
-    Tdepth = np.empty(numDepths-1)*np.nan
-    for i in range(0,numDepths-1):
+    metaBot_depth = depths[numDepths - 1]
+    Tdepth = np.empty(numDepths - 1) * np.nan
+    for i in range(0, numDepths - 1):
         Tdepth[i] = 1/2*(depths[i+1] + depths[i])
     sortDepth0 = np.append(Tdepth,thermoD+1e-5)
     sortDepth = np.sort(sortDepth0)
