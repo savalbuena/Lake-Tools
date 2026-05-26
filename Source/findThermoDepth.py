@@ -7,15 +7,14 @@
 
 import numpy as np
 import sys
-from locPeaks import *
+# from locPeaks import *
 
 
 def findThermoDepth(**kw):
     nargin = len(kw)
     rhoVar = kw['rhoVar']
     depths = kw['depths']
-    ax = kw['axis']
-    print(ax)
+
     if nargin <= 3:
         Smin = 0.1
         seasonal = False
@@ -25,7 +24,7 @@ def findThermoDepth(**kw):
     dRhoPerc = 0.15   # min percentage max for unique thermocline step
     numDepths = len(depths)
     # drho_dz = np.empty(numDepths-1)*np.nan
-    drho_dz = np.gradient(rhoVar, depths, axis=ax, edge_order=2)
+    drho_dz = np.gradient(rhoVar, depths, axis=0, edge_order=1)
 
     if seasonal:
         # look for two distinct maximum slopes, lower one assumed to be seasonal
@@ -77,8 +76,8 @@ def findThermoDepth(**kw):
         # return thermoD, thermoInd, drho_dz, SthermoD, SthermoInd
 
     else:
-        mDrhoZ = np.max(drho_dz)
-        thermoInd = np.where(drho_dz == mDrhoZ)[0]
+        mDrhoZ = np.nanmax(drho_dz)
+        thermoInd = np.where(drho_dz == mDrhoZ)[0][0]
         thermoD = 1 / 2 * (depths[thermoInd] + depths[thermoInd + 1])  # depth of max slope
         if thermoInd > 0 and thermoInd < numDepths - 1:
             # if within range,

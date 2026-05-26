@@ -66,7 +66,7 @@ def schmidtStability(**kw):
     Io, = np.where(kw['bthD'] == Zo)[0]
     Ao = kw['bthA'][Io]
     if Ao == 0:
-        error('Surface area cannot be zero, check *.bth file')
+        raise ValueError('Surface area cannot be zero, check *.bth file')
 
     rhoL = wDensity(T=kw['wtr'],P=kw['depths'],S=kw['sal'], pressureType = 'depth')
 

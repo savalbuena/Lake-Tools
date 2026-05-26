@@ -37,6 +37,7 @@ vonK = 0.4; #von Karman k
 
 def uStar(wspd,windHeight,EpiRho):
     # ~ eqn (1) ~
+    wspd = np.atleast_1d(wspd)
     cd = 0.0015*np.ones(len(wspd))
     idata = wspd < 5
     cd[idata] = 0.001
