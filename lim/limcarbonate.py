@@ -4,7 +4,7 @@ import numpy as np
 from types import SimpleNamespace
 from typing import Any, Dict, Tuple, Optional
 
-from .limstate import limstate
+from .limstate import lim_state
 
 def _as_array(x: Any) -> np.ndarray:
     return np.asarray(x, dtype=float)
@@ -12,7 +12,7 @@ def _as_array(x: Any) -> np.ndarray:
 def _is_str(x: Any) -> bool:
     return isinstance(x, str)
 
-def limcarbonate(*args, nargout: int | None = None):
+def lim_carbonate(*args, nargout: int | None = None):
     """
     Port of limcarbonate.m (R. Pawlowicz).
 
@@ -100,7 +100,7 @@ def limcarbonate(*args, nargout: int | None = None):
         rho = np.ones_like(Sarr, dtype=float)
         units = 'mol/kg'
     else:
-        rho = limstate(Sarr, Tarr, Pdbar)
+        rho = lim_state(Sarr, Tarr, Pdbar)
         units = 'M'
 
     # Chemistry constants at (T,S,P)
@@ -256,7 +256,7 @@ def limcarbonate(*args, nargout: int | None = None):
         else:
             TA_call = TA_input
             DIC_call = DIC
-        Carb2 = limcarbonate('AD' + ('KG' if typ.endswith('KG') else ''), TA_call, DIC_call, T2, Sarr, Pdbar2)
+        Carb2 = lim_carbonate('AD' + ('KG' if typ.endswith('KG') else ''), TA_call, DIC_call, T2, Sarr, Pdbar2)
         return _maybe_nargout(Carb2, nargout)
 
     # Assemble output structure (dict)

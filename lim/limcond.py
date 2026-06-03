@@ -56,7 +56,7 @@ def _getconst(const: SimpleNamespace, k: int) -> SimpleNamespace:
                 out[name] = float(arr.flat[0])
     return SimpleNamespace(**out)
 
-def limcond(*args, nargout: int | None = None):
+def lim_cond(*args, nargout: int | None = None):
     """
     Port of limcond.m (R. Pawlowicz).
 

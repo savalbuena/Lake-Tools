@@ -1,6 +1,6 @@
 import numpy as np
 
-def schmidt_stability(z, rho, A, A0, z_bar_in, z_bar_input, g=9.81):
+def schmidtstability(z, rho, A, A0, z_bar_in, z_bar_input, g=9.81):
     """
     Compute the Stratification Stability Index (SSI).
     

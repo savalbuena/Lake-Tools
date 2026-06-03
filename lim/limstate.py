@@ -15,7 +15,7 @@ def _as_vec(x: Any) -> np.ndarray:
     return a
 
 
-def limstate(S, T, p=0, *, nargout: int | None = None):
+def lim_state(S, T, p=0, *, nargout: int | None = None):
     """
     Port of limstate.m (R. Pawlowicz).
 
