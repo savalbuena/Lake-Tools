@@ -1,4 +1,5 @@
 # To import functions
+import numpy as np
 def lakenumber(st, uSt, Ao, rho, zm, zt, zg):
     """
     Compute the Lake Number (Ln), a dimensionless index describing the
@@ -77,6 +78,9 @@ def lakenumber(st, uSt, Ao, rho, zm, zt, zg):
     st = st * Ao / g    # to transform Schmidt Stability Index from Idso to Stability Index
     zt = zm - zt        # Estimate height from bottom of thermocline
     zg = zm - zg        # Estimate height from bottom of center of volume
+
+    mask = uSt == 0
+    uSt[mask] = np.nan
 
     Ln = (g * st * (1 - zt/zm)) / (rho * uSt**2 * Ao**(3/2) * (1 - zg/zm))
 
