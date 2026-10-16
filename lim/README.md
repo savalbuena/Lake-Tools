@@ -1,7 +1,7 @@
 
 # lim (Python port of MATLAB limnological chemistry / conductivity functions)
 
-This folder contains a pure-Python (NumPy/SciPy) port of the MATLAB functions you were calling via `matlab.engine`:
+This folder contains a pure-Python (NumPy/SciPy) port of the MATLAB functions for `lim` created by Rich Palowics. Manuscript available at https://doi.org/10.4319/lom.2008.6.489 
 
 - `limcarbonate`  (carbonate system helper)
 - `limcond`       (conductivity/salinity from in-situ conductivity)
@@ -20,7 +20,7 @@ python -c "import sys; sys.path.insert(0,'.'); import lim; print(lim.limstate(0,
 
 Or add the parent folder to `PYTHONPATH`.
 
-## Usage matching your current pipeline
+## Usage on a simple python script
 
 ```python
 import numpy as np
@@ -61,4 +61,3 @@ rho_lim = limstate(Sc_gkg.reshape(-1,1), T_mat, p_mat)
 
 - `limcond` reads `limPFAC.mat` (included) for the ion-pair interaction fit parameters.
 - This port targets your main workflow (`condmode=0`, i.e., reference conductivity from measured conductivity).
-  If you later need the opposite direction (conductivity from composition), tell me and I’ll extend `limcond`.
